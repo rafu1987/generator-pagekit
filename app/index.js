@@ -9,7 +9,7 @@ var mv = require('mv');
 var fs = require('fs');
 var pathExists = require('path-exists');
 var request = require("request");
-var md5 = require('md5');
+var bcrypt = require('bcryptjs');
 var pk;
 
 module.exports = yeoman.generators.Base.extend({
@@ -105,7 +105,10 @@ function processSqlFile() {
       console.log(err);
     }
 
-    var result = substituteMarker(data, '###PASS###', md5(pk.Pass), false);
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(pk.Pass, salt);
+
+    var result = substituteMarker(data, '###PASS###', hash, false);
     result = substituteMarker(result, '###NAME###', pk.Name, false);
     result = substituteMarker(result, '###USER###', pk.Username, false);
     result = substituteMarker(result, '###EMAIL###', pk.Email, false);
