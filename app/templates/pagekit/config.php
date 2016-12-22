@@ -10,10 +10,10 @@
     array (
       'mysql' => 
       array (
-        'host' => 'mysql',
-        'user' => 'root',
-        'password' => 'install',
-        'dbname' => 'pagekit-yeoman',
+        'host' => '###HOST###',
+        'user' => '###USER###',
+        'password' => '###PASS###',
+        'dbname' => '###DB###',
         'prefix' => 'pk_',
       ),
     ),
